@@ -1,0 +1,41 @@
+/**
+解题思路：
+    1. travse from the head.if next node equals current one, delete next node and pointer stays at current node.
+    2. if not equals, pointer moves to next node.
+注意事项：
+    
+Complexity：
+    O(n)
+Space:
+    O(1)
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null)
+        {
+            return head;
+        }
+        ListNode r = head;
+        while(r.next!=null)
+        {
+            if(r.val == r.next.val)
+            {
+                r.next = r.next.next;
+            }
+            else
+            {
+                r = r.next;
+            }
+        }
+        return head;
+    }
+}
