@@ -1,0 +1,70 @@
+/**
+解题思路：
+    1. travse both list once, calculate the length diff, take the longer one and traverse diff steps ahead.
+    2. Then start travse together on both list, if there is a node equals, then return that node, otherwise return null in the end.
+注意事项：
+    
+Complexity：
+    O(n)
+Space:
+    O(1)
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null)
+        {
+            return null;
+        }
+        
+        int ca = 0, cb = 0;
+        ListNode ra = headA, rb = headB;
+        while(ra!=null)
+        {
+            ca++;
+            ra = ra.next;
+        }
+        
+        while(rb!=null)
+        {
+            cb++;
+            rb = rb.next;
+        }
+        
+        ListNode headAA = headA, headBB = headB;
+        if(cb > ca)
+        {
+            ListNode temp = headBB;
+            headBB = headAA;
+            headAA = temp;
+        }
+        
+        int diff = Math.abs(cb-ca);
+        for(int i=0; i<diff; i++)
+        {
+            headAA = headAA.next;
+        }
+        
+        while(headAA!=null)
+        {
+            if(headAA == headBB)
+            {
+                return headAA;
+            }
+            headAA = headAA.next;
+            headBB = headBB.next;
+        }
+        return null;
+    }
+}
