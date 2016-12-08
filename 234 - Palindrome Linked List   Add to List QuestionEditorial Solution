@@ -1,0 +1,68 @@
+/**
+解题思路：
+    1. in place, reverse first half and traverse from first half head and second half head.
+注意事项：
+    1. dont forget dummyhead.next = head;
+Complexity：
+    O(n)
+Space:
+    O(1)
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null)
+        {
+            return true;
+        }
+        
+        ListNode dummyhead = new ListNode(0), p1 = dummyhead, p2 = dummyhead;
+        dummyhead.next = head;
+        int count = 0;
+        //2 runners, find where later half start.
+        while(p2.next !=null)
+        {
+            p2 = p2.next;
+            count++;
+            if(p2.next == null)
+            {
+                break;
+            }
+            p2 = p2.next;
+            count++;
+            p1 = p1.next;
+        }
+        
+        ListNode laterhead = count%2==0?p1.next:p1.next.next;
+        //reverse first half
+        p1 = head;
+        count = count/2;
+        for(int i=0; i<count-1; i++)
+        {
+            ListNode temp = p1.next;
+            p1.next = p1.next.next;
+            temp.next = head;
+            head = temp;
+        }
+        
+        while(laterhead!=null)
+        {
+            if(laterhead.val != head.val)
+            {
+                return false;
+            }
+            laterhead = laterhead.next;
+            head = head.next;
+        }
+        return true;
+    }
+    
+}
