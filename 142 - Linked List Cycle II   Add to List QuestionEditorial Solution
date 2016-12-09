@@ -1,0 +1,64 @@
+/**
+解题思路：
+    1. Its more of a math question.
+    2. Set 2 runners, one go 2 steps(r2) and the other go 1 step(r1) at a time.
+    3. T is the distance from start to circle entry point. L is the length of the circle.
+    4. When r1 is at circle entry, r2 is T steps ahead. Or, L-T%L behind. It takes L-T%L steps to catch up r1. So the node where r1,r2 meet is L-T%L into the circle, put it another way, its T steps to reach the entry point. 
+    5. So when they meet, set another runner r3 starting from beginning going 1 step at a time, it will meet r1 at entry point
+注意事项：
+    
+Complexity：
+    O(n)
+Space:
+    O(1)
+*/
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if(head == null)
+        {
+            return head;
+        }
+        
+        //traverse with r1 r2 till they meet.
+        ListNode r1 = head, r2 = head, r3 = head;
+        while(r1!=null && r2!=null)
+        {
+            r2 = r2.next;
+            if(r2 == null)
+            {
+                return null;
+            }
+            r2 = r2.next;
+            r1 = r1.next;
+            if(r1 == r2)
+            {
+                break;
+            }
+        }
+        
+        if(r2 == null)
+        {
+            return null;
+        }
+        
+        //r3 start from beginning and should meet r1 at entry point of the circle.
+        while(r1!=r3)
+        {
+            r1 = r1.next;
+            r3 = r3.next;
+        }
+        return r1;
+    }
+}
