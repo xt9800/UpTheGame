@@ -9,7 +9,7 @@ Solution#1
 Complexity：
     O(n)
 Space:
-    O(1)
+    O(n)
 */
 
 /**
