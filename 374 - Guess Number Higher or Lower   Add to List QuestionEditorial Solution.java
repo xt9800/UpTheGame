@@ -4,7 +4,7 @@
 注意事项：
     1. Calculate mid need to be fast in case of big numbers. doing m = l + (r-l)/2 is faster than m = (l+r)/2;
 Complexity：
-    O(n)
+    O(logn)
 Space:
     O(1)
 */
