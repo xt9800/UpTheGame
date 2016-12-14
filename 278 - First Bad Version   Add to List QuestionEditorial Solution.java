@@ -13,7 +13,7 @@
 注意事项：
     When calculating mid, do left + (right - left)/2 because division is costly and subtraction is not, so smaller number yields a faster division. it is the same as (left+right)/2 but faster.
 Complexity：
-    O(n)
+    O(logn)
 Space:
     O(1)
 */
